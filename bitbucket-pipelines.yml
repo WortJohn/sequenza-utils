@@ -1,0 +1,19 @@
+# This is a sample build configuration for Python.
+# Check our guides at https://confluence.atlassian.com/x/x4UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: biocontainers/python3-pysam:v0.10.0ds-2-deb_cv1
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - python3 setup.py install
+          - sequenza-utils --help
+          - pip install codecov
+          - echo $BITBUCKET_COMMIT
+          - echo $BITBUCKET_BRANCH
+          - echo $BITBUCKET_CLONE_DIR
+          - coverage run --source=$BITBUCKET_CLONE_DIR setup.py test
+          - codecov --token 422b447a-1e62-4f70-969b-26d0dd372552 --commit $BITBUCKET_COMMIT --branch $BITBUCKET_BRANCH --disable detect

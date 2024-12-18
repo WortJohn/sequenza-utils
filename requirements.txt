@@ -1,0 +1,3 @@
+# Install all the requirements needed for documentation
+
+-r docs/requirements.txt

@@ -1,0 +1,5 @@
+VERSION = "3.9.0"
+DATE = "17 October 2023"
+AUTHOR = "Favero Francesco"
+EMAIL = "francesco.favero@bric.ku.dk"
+WEBSITE = "http://sequenza-utils.readthedocs.org"
