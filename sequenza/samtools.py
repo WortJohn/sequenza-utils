@@ -24,7 +24,7 @@ class bam_mpileup:
         if bed:
             samtools_view = "%s view -u %s -T %s -L %s" % (samtools_bin, bam, fasta, bed)
             samtools_view = shlex.split(samtools_view)
-        elif regions:
+        else:
             samtools_view = "%s view -u %s -T %s" % (samtools_bin, bam, fasta)
             samtools_view = shlex.split(samtools_view) + regions
         samtools_pile = "%s mpileup -f %s -q %i -Q %i -" % (samtools_bin, fasta, q, Q)
@@ -69,7 +69,7 @@ class indexed_pileup:
         tabix = "%s %s" % (tabix_bin, pileup)
         if bed:
             tabix = tabix + " -R %s" % (bed)
-        elif regions:
+        else:
             tabix = shlex.split(tabix) + regions
         self.proc = subprocess.Popen(tabix, stdout=subprocess.PIPE, bufsize=4096)
 
