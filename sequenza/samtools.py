@@ -66,10 +66,11 @@ class indexed_pileup:
                     "appropriate argument"
                 )
             )
-        tabix = "%s %s" % (tabix_bin, pileup)
         if bed:
-            tabix = tabix + " -R %s" % (bed)
+            tabix = "%s -R %s %s" % (tabix_bin, bed, pileup)
+            tabix = shlex.split(tabix)
         else:
+            tabix = "%s %s" % (tabix_bin, pileup)
             tabix = shlex.split(tabix) + regions
         self.proc = subprocess.Popen(tabix, stdout=subprocess.PIPE, bufsize=4096)
 
